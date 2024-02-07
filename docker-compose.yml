@@ -1,0 +1,33 @@
+version: '3.1'
+
+services:
+  db:
+    image: postgres:10
+    environment:
+      POSTGRES_DB: odoo
+      POSTGRES_USER: odoo
+      POSTGRES_PASSWORD: odoo
+    restart: unless-stopped
+
+  odoo:
+    image: odoo:13.0
+    depends_on:
+      - db
+    ports:
+      - "8069:8069"
+    environment:
+      HOST: db
+      USER: odoo
+      PASSWORD: odoo
+    restart: unless-stopped
+
+  icgroup:
+    image: amlys/ic-webapp:1.0
+    depends_on:
+      - odoo
+    ports:
+      - "8080:8080"
+    environment:
+      ODOO_URL: odoo
+      PGADMIN_URL: db
+    restart: unless-stopped
