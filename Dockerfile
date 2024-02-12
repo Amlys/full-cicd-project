@@ -15,5 +15,4 @@ EXPOSE 8080
 # ENV ODOO_URL=https://odoo.com
 # ENV PGADMIN_URL=https://pgadmin.org
 
-## entrypoint
 ENTRYPOINT [ "python", "app.py" ]
