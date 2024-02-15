@@ -10,7 +10,6 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                // on utilise script ici car pour cloner dans un folder spécifique on peut pas directement dans steps git url
                 script {
                     dir('ic-webapp') {
                         git url: 'https://github.com/Amlys/full-cicd-project.git', branch: 'main'
@@ -23,16 +22,16 @@ pipeline {
                 dir('ic-webapp') {
                     sh '''
                     echo === Building...
-                    docker build -t $image_name . || exit 1
+                    docker build -t ${params.image_name} . || exit 1
 
                     echo === Taging the image
-                    docker tag $image_name amlys/$image_name:v1
+                    docker tag ${params.image_name} amlys/${params.image_name}:v1
 
                     echo === Logging to DockerHub
-                    echo $AMLYS_DOCKERHUB_PWD | docker login -u amlys --password-stdin
+                    echo ${AMLYS_DOCKERHUB_PWD} | docker login -u amlys --password-stdin
 
                     echo === Pushing the image
-                    docker push amlys/$image_name:v1
+                    docker push amlys/${params.image_name}:v1
                     '''
                 }
             }
