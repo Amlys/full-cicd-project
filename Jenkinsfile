@@ -10,6 +10,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
+                // on utilise script ici car pour cloner dans un folder spécifique on peut pas directement dans steps git url
                 script {
                     dir('ic-webapp') {
                         git url: 'https://github.com/Amlys/full-cicd-project.git', branch: 'main'
