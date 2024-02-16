@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'BUILDUX'}
     environment {
         AMLYS_DOCKERHUB_PWD = credentials('AMLYS_DOCKERHUB_PWD')
     }
