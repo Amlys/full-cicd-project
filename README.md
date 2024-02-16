@@ -1,4 +1,7 @@
-﻿# PROJET FINAL DEVOPS. 
+﻿[![Build Status](https://tuna-flexible-oarfish.ngrok-free.app/job/Build_Pipeline_WebApp_FilRouge_Project/badge/icon)](https://tuna-flexible-oarfish.ngrok-free.app/job/Build_Pipeline_WebApp_FilRouge_Project/)
+
+
+# PROJET FINAL DEVOPS. 
 
 ## **1) Partie 1: Introduction**
 
