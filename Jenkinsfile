@@ -5,6 +5,9 @@ pipeline {
     agent any
     environment {
         AMLYS_DOCKERHUB_PWD = credentials('AMLYS_DOCKERHUB_PWD')
+        IMAGE_NAME = "ic-webapp"
+        IMAGE_TAG = "v1"
+        SOURCES_DIR= "ic-webapp-sources"
         // faudra penser à créer image_name var env
     }
     parameters {
@@ -16,7 +19,7 @@ pipeline {
             steps {
                 // on utilise script ici car pour cloner dans un folder spécifique on peut pas directement dans steps git url
                 script {
-                    dir('ic-webapp') {
+                    dir('$SOURCES_DIR') {
                         git url: 'https://github.com/Amlys/full-cicd-project.git', branch: 'main'
                     }
                 }
@@ -24,31 +27,35 @@ pipeline {
         }
         stage('Build and Push Docker Image') {
             steps {
-                dir('ic-webapp') {
+                dir('$SOURCES_DIR') {
                     sh '''
                     echo === Building...
-                    docker build -t ic-webapp . || exit 1
+                    docker build -t $IMAGE_NAME . || exit 1
 
                     echo === Taging the image
-                    docker tag ic-webapp amlys/ic-webapp:v1
+                    docker tag $IMAGE_NAME amlys/$IMAGE_NAME:$IMAGE_TAG
 
                     echo === Logging to DockerHub
                     echo ${AMLYS_DOCKERHUB_PWD} | docker login -u amlys --password-stdin
 
                     echo === Pushing the image
-                    docker push amlys/ic-webapp:v1
+                    docker push amlys/$IMAGE_NAME:$IMAGE_TAG
                     '''
                 }
             }
         }
     }
     post {
+        // script" - valid conditions are [always, changed, fixed, regression, aborted, success, unsuccessful, unstable, failure, notBuilt, cleanup]
         cleanup {
             cleanWs()
         }
 
-        script {
-            slackNotifier currentBuild.result
+        always {
+            script {
+                slackNotifier currentBuild.result
+            }           
         }
+
     }
 }
