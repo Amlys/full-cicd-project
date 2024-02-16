@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         AMLYS_DOCKERHUB_PWD = credentials('AMLYS_DOCKERHUB_PWD')
+        // faudra penser à créer image_name var env
     }
     parameters {
         booleanParam(name: 'is_release', defaultValue: false, description: 'is release ?')
