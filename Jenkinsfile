@@ -1,4 +1,5 @@
-@Library('shared-libraries')
+/* import shared library */
+@Library('shared-libraries')_
 
 pipeline {
     agent any
