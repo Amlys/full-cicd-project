@@ -1,4 +1,4 @@
-﻿[![Build Status](http://ec2-15-188-63-196.eu-west-3.compute.amazonaws.com:8080/buildStatus/icon?job=Build_Pipeline_WebApp_FilRouge_Project)](https://tuna-flexible-oarfish.ngrok-free.app/job/Build_Pipeline_WebApp_FilRouge_Project/)
+﻿[![Build Status](https://tuna-flexible-oarfish.ngrok-free.app/buildStatus/icon?job=Build_Pipeline_WebApp_FilRouge_Project)](https://tuna-flexible-oarfish.ngrok-free.app/job/Build_Pipeline_WebApp_FilRouge_Project/)
 
 # PROJET FINAL DEVOPS. 
 
